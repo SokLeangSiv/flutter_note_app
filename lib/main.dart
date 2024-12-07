@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'narak',
+      title: 'vattanak is not here',
       theme: ThemeData(
         primarySwatch: Colors.yellow,
         scaffoldBackgroundColor: Colors.yellow[50],
