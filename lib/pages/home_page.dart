@@ -16,7 +16,7 @@ class _HomePageState extends State<HomePage> {
     List<Map<String, dynamic>> notes = [ // Updated to store Color as dynamic
       {
         'title': 'Home Page',
-        'subtitle': 'This is the home page.vattanak is a gay always love to fap alone at homoe in the toliet and he always waering the headphone to watch porn at home ',
+        'subtitle': 'This is the home page.',
         'date': '2021-10-10',
         'color': Colors.yellow[100], // Color object
       },
