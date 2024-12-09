@@ -9,6 +9,9 @@ void main() {
 }
 
 class TodoList extends StatefulWidget {
+  const TodoList({super.key});
+
+  @override
   TodoListState createState() => TodoListState();
 }
 
@@ -26,8 +29,8 @@ class TodoListState extends State<TodoList> {
          children: <Widget>[
 
            Container(
-             padding: EdgeInsets.all(20),
-             child: Text(
+             padding: const EdgeInsets.all(20),
+             child: const Text(
                  "Create Todo List",
                style: TextStyle(
                  fontWeight: FontWeight.bold,
@@ -38,8 +41,8 @@ class TodoListState extends State<TodoList> {
            ),
 
            Container(
-             padding: EdgeInsets.only(left: 20.0),
-             child: Text(
+             padding: const EdgeInsets.only(left: 20.0),
+             child: const Text(
                  "Title:",
                style: TextStyle(
                  fontSize: 20,
@@ -48,8 +51,8 @@ class TodoListState extends State<TodoList> {
            ),
 
            Container(
-            padding: EdgeInsets.all(20),
-             child: TextField(
+            padding: const EdgeInsets.all(20),
+             child: const TextField(
                decoration: InputDecoration(
                  border: OutlineInputBorder(),
                  label: Text("Title"),
@@ -60,8 +63,8 @@ class TodoListState extends State<TodoList> {
 
 
            Container(
-               padding: EdgeInsets.only(left: 20.0),
-               child: Text(
+               padding: const EdgeInsets.only(left: 20.0),
+               child: const Text(
                  "Description:",
                  style: TextStyle(
                    fontSize: 20,
@@ -70,8 +73,8 @@ class TodoListState extends State<TodoList> {
            ),
 
            Container(
-               padding: EdgeInsets.all(20),
-               child: TextField(
+               padding: const EdgeInsets.all(20),
+               child: const TextField(
                    decoration: InputDecoration(
                      contentPadding: EdgeInsets.symmetric(vertical: 40),
                      border: OutlineInputBorder(),
@@ -82,8 +85,8 @@ class TodoListState extends State<TodoList> {
            ),
 
            Container(
-               padding: EdgeInsets.only(left: 20.0),
-               child: Text(
+               padding: const EdgeInsets.only(left: 20.0),
+               child: const Text(
                  "Date:",
                  style: TextStyle(
                    fontSize: 20,
@@ -92,8 +95,8 @@ class TodoListState extends State<TodoList> {
            ),
 
             Container(
-               padding: EdgeInsets.all(20),
-               child: TextField(
+               padding: const EdgeInsets.all(20),
+               child: const TextField(
                    decoration: InputDecoration(
                      border: OutlineInputBorder(),
                      label: Text("Date"),
@@ -103,15 +106,15 @@ class TodoListState extends State<TodoList> {
            ),
 
            Container(
-              padding: EdgeInsets.only(left: 20.0),
+              padding: const EdgeInsets.only(left: 20.0),
               height: 50,
               child: ElevatedButton(
                     onPressed: null,
                     style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(Colors.yellow),
+                      backgroundColor: WidgetStateProperty.all<Color>(Colors.yellow),
 
                     ),
-                    child: Text(
+                    child: const Text(
                         "Create",
                       style: TextStyle(
                         fontSize: 20,

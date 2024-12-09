@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.yellow,
         onPressed: () {
           Navigator.push(context,
-            new MaterialPageRoute(builder: (context) => TodoList())
+            MaterialPageRoute(builder: (context) => TodoList())
           );
         },
         child: const Icon(Icons.add),
