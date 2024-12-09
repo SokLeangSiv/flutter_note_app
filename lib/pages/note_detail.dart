@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:midterm/components/notes.dart';
 
 class NoteDetail extends StatelessWidget {
-  final Map<String, dynamic> note;
+  // final Map<String, dynamic> note;
+  final Notes note;
   const NoteDetail({
     super.key,
     required this.note,
@@ -31,19 +33,22 @@ class NoteDetail extends StatelessWidget {
           children: [
             NoteSection(
               title: 'Title',
-              content: note['title'],
+              // content: note['title'],
+              content: note.title.toString(),
               icon: Icons.title_outlined,
             ),
             const SizedBox(height: 20),
             NoteSection(
               title: 'Description',
-              content: note['subtitle'],
+              // content: note['subtitle'],
+              content: note.description.toString(),
               icon: Icons.description,
             ),
             const SizedBox(height: 20),
             NoteSection(
               title: 'Date',
-              content: note['date'],
+              // content: note['date'],
+              content: note.date.toString(),
               icon: Icons.calendar_today,
             ),
             const SizedBox(height: 20),
@@ -55,34 +60,34 @@ class NoteDetail extends StatelessWidget {
                 color: Colors.black87,
               ),
             ),
-            const SizedBox(height: 10),
-            Container(
-              height: 80,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: note['color'],
-                borderRadius: BorderRadius.circular(15),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Colors.black12,
-                    blurRadius: 8,
-                    offset: Offset(0, 4),
-                  ),
-                ],
-              ),
-              child: Center(
-                child: Text(
-                  note['color'].toString(),
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: note['color'].computeLuminance() > 0.5
-                        ? Colors.black
-                        : Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
+            // const SizedBox(height: 10),
+            // Container(
+            //   height: 80,
+            //   width: double.infinity,
+            //   decoration: BoxDecoration(
+            //     // color: note['color'],
+            //     borderRadius: BorderRadius.circular(15),
+            //     boxShadow: const [
+            //       BoxShadow(
+            //         color: Colors.black12,
+            //         blurRadius: 8,
+            //         offset: Offset(0, 4),
+            //       ),
+            //     ],
+            //   ),
+            //   child: Center(
+            //     child: Text(
+            //       note['color'].toString(),
+            //       style: TextStyle(
+            //         fontSize: 18,
+            //         color: note['color'].computeLuminance() > 0.5
+            //             ? Colors.black
+            //             : Colors.white,
+            //         fontWeight: FontWeight.bold,
+            //       ),
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),

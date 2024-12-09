@@ -1,4 +1,9 @@
+import 'dart:convert';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:midterm/components/notes.dart';
+import 'package:midterm/pages/home_page.dart';
 
 void main() {
   runApp(
@@ -13,6 +18,73 @@ class TodoList extends StatefulWidget {
 }
 
 class TodoListState extends State<TodoList> {
+
+  TextEditingController titleInput = TextEditingController();
+  TextEditingController descriptionInput = TextEditingController();
+  TextEditingController dateInput = TextEditingController();
+  TextEditingController resultController = TextEditingController();
+  List<Notes> notes = List.empty(growable: true);
+  late SharedPreferences sp; // declare share_preference object as global
+  // String? result = "result";
+
+  getSharedPreferences() async{
+    sp = await SharedPreferences.getInstance();
+    // readFromSp();
+    saveIntoSp();
+  }
+
+  saveIntoSp(){
+    List<String> datas = notes.map((note) => jsonEncode(note.toJson())).toList(); // convert List<object> to List<String>
+    sp.setStringList("notes", datas);
+  }
+
+  readFromSp() async{
+    sp = await SharedPreferences.getInstance();
+   List<String>? NotesListString =  sp.getStringList("notes");
+
+
+
+   setState(() {
+     if(NotesListString != null){
+       notes = NotesListString.map((note) => Notes.fromJson(jsonDecode(note))).toList();
+     }
+   }); // use to re-render the current state. because we want to display new result on widget
+  }
+
+@override
+
+  @override
+  void initState() {
+    readFromSp(); // call note data from local storage
+    // TODO: implement initState
+    super.initState();
+  }
+
+  void create_todo() {
+    String? title = titleInput.text.trim();
+    String? description = descriptionInput.text.trim();
+    String? date = dateInput.text.trim();
+
+    setState(() {
+      notes.add(Notes(title: title, description: description, date: date));
+    }); // we re-render the state because we want to update value
+
+    getSharedPreferences(); // save the notes data into local storage
+
+    Navigator.push(
+      context,
+      new MaterialPageRoute(builder: (context) => HomePage()),
+    ); // after save it will navigate to homepage
+  }
+
+  Color pickerColor = Color(0xff443a49);
+  Color currentColor = Color(0xff443a49);
+
+  void changeColor(Color color) {
+    setState(() => pickerColor = color);
+  }
+
+
 
   @override
   Widget build(BuildContext build){
@@ -50,6 +122,7 @@ class TodoListState extends State<TodoList> {
            Container(
             padding: EdgeInsets.all(20),
              child: TextField(
+                 controller: titleInput,
                decoration: InputDecoration(
                  border: OutlineInputBorder(),
                  label: Text("Title"),
@@ -72,6 +145,7 @@ class TodoListState extends State<TodoList> {
            Container(
                padding: EdgeInsets.all(20),
                child: TextField(
+                   controller: descriptionInput,
                    decoration: InputDecoration(
                      contentPadding: EdgeInsets.symmetric(vertical: 40),
                      border: OutlineInputBorder(),
@@ -94,6 +168,7 @@ class TodoListState extends State<TodoList> {
             Container(
                padding: EdgeInsets.all(20),
                child: TextField(
+                   controller: dateInput,
                    decoration: InputDecoration(
                      border: OutlineInputBorder(),
                      label: Text("Date"),
@@ -103,10 +178,37 @@ class TodoListState extends State<TodoList> {
            ),
 
            Container(
+               padding: EdgeInsets.only(left: 20.0),
+               child: Text(
+                 "Color:",
+                 style: TextStyle(
+                   fontSize: 20,
+                 ),
+               )
+           ),
+
+           Container(
+             padding: EdgeInsets.all(50),
+             height: 100,
+             width: 200,
+             decoration: BoxDecoration(
+               color: Colors.red,
+             ),
+
+             child:
+                 TextButton(
+                 onPressed: null,
+                 child: Text('narak'),
+               )
+
+           ),
+
+
+           Container(
               padding: EdgeInsets.only(left: 20.0),
               height: 50,
               child: ElevatedButton(
-                    onPressed: null,
+                    onPressed: create_todo, // press create button to store data
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(Colors.yellow),
 
@@ -120,12 +222,23 @@ class TodoListState extends State<TodoList> {
                     ),
                )
            ),
+
+
+
+           // Text(notes[0].title.toString()),
          ]
        ),
-
 
 
     );
   }
 
 }
+
+// class Notes{
+//   String? title;
+//   String? description;
+//   String? date;
+//
+//   Notes({this.title,this.description,this.date});
+// }
