@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:midterm/components/note_tile.dart';
 import 'package:midterm/pages/note_detail.dart';
+import 'package:midterm/pages/create_todo_page.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -38,7 +39,9 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.yellow,
         onPressed: () {
-          Navigator.pushNamed(context, '/add_note');
+          Navigator.push(context,
+            new MaterialPageRoute(builder: (context) => TodoList())
+          );
         },
         child: const Icon(Icons.add),
       ),
@@ -52,7 +55,8 @@ class _HomePageState extends State<HomePage> {
           itemBuilder: (context, index) {
             return GestureDetector(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                Navigator.push(context
+                    , MaterialPageRoute(builder: (context) {
                   return NoteDetail(
                     note: notes[index],
                   );

@@ -14,8 +14,8 @@ class MyApp extends StatelessWidget {
       title: 'vattanak is not here',
       theme: ThemeData(
         primarySwatch: Colors.yellow,
-        scaffoldBackgroundColor: Colors.yellow[50],
-        appBarTheme: const AppBarTheme(
+        scaffoldBackgroundColor: Colors.yellow[50], // body background color
+        appBarTheme: const AppBarTheme( // pre-design for appbar
           backgroundColor: Colors.yellow,
           titleTextStyle: TextStyle(
             color: Colors.black,
