@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:midterm/components/notes.dart';
 import 'package:midterm/pages/home_page.dart';
 
+
 void main() {
   runApp(
       MaterialApp(
@@ -23,6 +24,7 @@ class TodoListState extends State<TodoList> {
   TextEditingController descriptionInput = TextEditingController();
   TextEditingController dateInput = TextEditingController();
   TextEditingController resultController = TextEditingController();
+  Color color = Color(0xFF00FF00);
   List<Notes> notes = List.empty(growable: true);
   late SharedPreferences sp; // declare share_preference object as global
   // String? result = "result";
@@ -35,7 +37,7 @@ class TodoListState extends State<TodoList> {
 
   saveIntoSp(){
     List<String> datas = notes.map((note) => jsonEncode(note.toJson())).toList(); // convert List<object> to List<String>
-    sp.setStringList("notes", datas);
+    sp.setStringList("notes", datas); // it lose data in here
   }
 
   readFromSp() async{
@@ -51,7 +53,38 @@ class TodoListState extends State<TodoList> {
    }); // use to re-render the current state. because we want to display new result on widget
   }
 
-@override
+  Widget buildColorPicker() => ColorPicker( // show the color selection board
+      pickerColor: color,
+      enableAlpha: false,
+      onColorChanged: (color) => setState(() => this.color = color),
+  );
+
+  void pickColor() => showDialog( // show the pop up message
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('pick your color'),
+        content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              buildColorPicker(),
+              Container(
+                  padding: EdgeInsets.only(top: 10),
+                  child: TextButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    child: Text(
+                        'Select',
+                        style: TextStyle(
+                          fontSize: 20,
+                        )
+                    ),
+                  )
+              )
+
+            ]
+        )
+     )
+  );
+
 
   @override
   void initState() {
@@ -66,7 +99,7 @@ class TodoListState extends State<TodoList> {
     String? date = dateInput.text.trim();
 
     setState(() {
-      notes.add(Notes(title: title, description: description, date: date));
+      notes.add(Notes(title: title, description: description, date: date, color: color.toString()));
     }); // we re-render the state because we want to update value
 
     getSharedPreferences(); // save the notes data into local storage
@@ -76,14 +109,6 @@ class TodoListState extends State<TodoList> {
       new MaterialPageRoute(builder: (context) => HomePage()),
     ); // after save it will navigate to homepage
   }
-
-  Color pickerColor = Color(0xff443a49);
-  Color currentColor = Color(0xff443a49);
-
-  void changeColor(Color color) {
-    setState(() => pickerColor = color);
-  }
-
 
 
   @override
@@ -188,17 +213,17 @@ class TodoListState extends State<TodoList> {
            ),
 
            Container(
-             padding: EdgeInsets.all(50),
-             height: 100,
-             width: 200,
+             margin: EdgeInsets.all(20),
+             height: 50,
+             width: 50,
              decoration: BoxDecoration(
-               color: Colors.red,
+               color: color,
              ),
 
              child:
                  TextButton(
-                 onPressed: null,
-                 child: Text('narak'),
+                 onPressed: pickColor,
+                 child: Text(''),
                )
 
            ),
@@ -223,8 +248,8 @@ class TodoListState extends State<TodoList> {
                )
            ),
 
-
-
+           //  Text(notes[1].color.toString()),
+           // Text(color.toString()),
            // Text(notes[0].title.toString()),
          ]
        ),
@@ -233,12 +258,8 @@ class TodoListState extends State<TodoList> {
     );
   }
 
+
+
 }
 
-// class Notes{
-//   String? title;
-//   String? description;
-//   String? date;
-//
-//   Notes({this.title,this.description,this.date});
-// }
+

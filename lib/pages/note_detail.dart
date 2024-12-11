@@ -60,34 +60,34 @@ class NoteDetail extends StatelessWidget {
                 color: Colors.black87,
               ),
             ),
-            // const SizedBox(height: 10),
-            // Container(
-            //   height: 80,
-            //   width: double.infinity,
-            //   decoration: BoxDecoration(
-            //     // color: note['color'],
-            //     borderRadius: BorderRadius.circular(15),
-            //     boxShadow: const [
-            //       BoxShadow(
-            //         color: Colors.black12,
-            //         blurRadius: 8,
-            //         offset: Offset(0, 4),
-            //       ),
-            //     ],
-            //   ),
-            //   child: Center(
-            //     child: Text(
-            //       note['color'].toString(),
-            //       style: TextStyle(
-            //         fontSize: 18,
-            //         color: note['color'].computeLuminance() > 0.5
-            //             ? Colors.black
-            //             : Colors.white,
-            //         fontWeight: FontWeight.bold,
-            //       ),
-            //     ),
-            //   ),
-            // ),
+            const SizedBox(height: 10),
+            Container(
+              height: 80,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                // color: note['color'],
+                borderRadius: BorderRadius.circular(15),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.black12,
+                    blurRadius: 8,
+                    offset: Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: Center(
+                child: Text(
+                  note.color.toString(),
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: stringToColor(note.color).computeLuminance() > 0.5
+                        ? Colors.black
+                        : Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),

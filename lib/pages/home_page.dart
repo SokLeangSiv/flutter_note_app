@@ -16,6 +16,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<Notes> notes = List.empty(growable: true);
+  // String color = "Color(0xff00ff00)";
   late SharedPreferences sp; // declare share_preference object as global
   // String? result = "result";
 
@@ -35,10 +36,13 @@ class _HomePageState extends State<HomePage> {
     if(NotesListString != null){
       notes = NotesListString.map((note) => Notes.fromJson(jsonDecode(note))).toList();
     }
+
     setState(() {
 
     }); // use to re-render the current state. because we want to display new result on widget
   }
+
+
 
   @override
   void initState() {
@@ -101,11 +105,11 @@ class _HomePageState extends State<HomePage> {
                 // subtitle: notes[index]['subtitle'] as String,
                 // date: notes[index]['date'] as String,
                 // color: notes[index]['color'] as Color, // Cast to Color
-
+                
                 title: notes[index].title as String,
                 subtitle: notes[index].description as String,
                 date: notes[index].date as String,
-                color: Colors.green,
+                color: stringToColor(notes[index].color) as Color,
 
                 onDelete: () {
                   setState(() {
