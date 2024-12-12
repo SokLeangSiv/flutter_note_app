@@ -3,6 +3,7 @@ import 'package:midterm/components/note_tile.dart';
 import 'package:midterm/pages/note_detail.dart';
 import 'package:midterm/pages/create_todo_page.dart';
 import 'package:midterm/components/notes.dart';
+import 'package:midterm/pages/search_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
@@ -85,6 +86,20 @@ class _HomePageState extends State<HomePage> {
       ),
       appBar: AppBar(
         title: const Text('Home Page'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.search),
+            onPressed: () {
+
+              
+                Navigator.push(
+                  context,
+                  new MaterialPageRoute(builder: (context) => SearchPage())
+                );
+              
+            },
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),
