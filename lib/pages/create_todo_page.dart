@@ -104,9 +104,10 @@ class TodoListState extends State<TodoList> {
 
     getSharedPreferences(); // save the notes data into local storage
 
-    Navigator.push(
+    Navigator.pushAndRemoveUntil(
       context,
       new MaterialPageRoute(builder: (context) => HomePage()),
+          (Route<dynamic> route) => false,
     ); // after save it will navigate to homepage
   }
 
