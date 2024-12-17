@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:midterm/pages/home_page.dart';
 
+import 'loading_page.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -25,7 +27,7 @@ class MyApp extends StatelessWidget {
           )
         )
       ),
-      home: const HomePage() ,
+      home: LoadApp() ,
     );
   }
 }

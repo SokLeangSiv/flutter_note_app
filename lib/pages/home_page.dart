@@ -108,12 +108,10 @@ class _HomePageState extends State<HomePage> {
           itemBuilder: (context, index) {
             return GestureDetector(
               onTap: () {
-                Navigator.push(context
-                    , MaterialPageRoute(builder: (context) {
-                  return NoteDetail(
-                    note: notes[index],
-                  );
-                }));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) {return NoteDetail(note: notes[index]// this note is the building attribute
+                  );}));
               },
               child: NoteTile(
                 // title: notes[index]['title'] as String,

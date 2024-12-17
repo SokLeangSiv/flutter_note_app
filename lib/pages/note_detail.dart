@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:midterm/components/notes.dart';
+import 'package:midterm/pages/edit_todo.dart';
 
 class NoteDetail extends StatelessWidget {
   // final Map<String, dynamic> note;
@@ -13,6 +14,18 @@ class NoteDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => EditTodo(note: note)) // parameter page
+              );
+            },
+            icon: Icon(Icons.edit),
+
+          ),
+        ],
         title: const Text(
           'Note Detail',
           style: TextStyle(

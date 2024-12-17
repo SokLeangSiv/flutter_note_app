@@ -23,8 +23,8 @@ class TodoListState extends State<TodoList> {
   TextEditingController titleInput = TextEditingController();
   TextEditingController descriptionInput = TextEditingController();
   TextEditingController dateInput = TextEditingController();
-  TextEditingController resultController = TextEditingController();
   Color color = Color(0xFF00FF00);
+  DateTime selectedDate = DateTime.now();
   List<Notes> notes = List.empty(growable: true);
   late SharedPreferences sp; // declare share_preference object as global
   // String? result = "result";
@@ -91,15 +91,32 @@ class TodoListState extends State<TodoList> {
     readFromSp(); // call note data from local storage
     // TODO: implement initState
     super.initState();
+
+  }
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(2015),
+      lastDate: DateTime(2025),
+    );
+    if (picked != null && picked != selectedDate) {
+      setState(() {
+        selectedDate = picked;
+        String selectDateInString = selectedDate.toString().replaceAll('00:00:00.000', '');
+        dateInput.text = selectDateInString;
+      });
+    }
   }
 
   void create_todo() {
     String? title = titleInput.text.trim();
     String? description = descriptionInput.text.trim();
-    String? date = dateInput.text.trim();
+    String selectDateInString = selectedDate.toString().replaceAll('00:00:00.000', '');
 
     setState(() {
-      notes.add(Notes(title: title, description: description, date: date, color: color.toString()));
+      notes.add(Notes(title: title, description: description, date: selectDateInString, color: color.toString()));
     }); // we re-render the state because we want to update value
 
     getSharedPreferences(); // save the notes data into local storage
@@ -116,7 +133,7 @@ class TodoListState extends State<TodoList> {
   Widget build(BuildContext build){
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Create Todo List'),
+        title: const Text('Create Note'),
       ),
 
      body: Column(
@@ -126,7 +143,7 @@ class TodoListState extends State<TodoList> {
            Container(
              padding: EdgeInsets.all(20),
              child: Text(
-                 "Create Todo List",
+                 "Create Note",
                style: TextStyle(
                  fontWeight: FontWeight.bold,
                  fontSize: 30
@@ -193,14 +210,24 @@ class TodoListState extends State<TodoList> {
 
             Container(
                padding: EdgeInsets.all(20),
-               child: TextField(
-                   controller: dateInput,
-                   decoration: InputDecoration(
-                     border: OutlineInputBorder(),
-                     label: Text("Date"),
-                     prefixIcon: Icon(Icons.calendar_today),
-                   )
-               )
+               child: ElevatedButton(
+                 onPressed: () => _selectDate(context),
+                 child: Text('Select Date'),
+               ),
+           ),
+
+           Container(
+             padding: EdgeInsets.all(20),
+             width: 200,
+             child: TextField(
+               readOnly: true,
+               controller: dateInput,
+               decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  label: Text("Date"),
+                  prefixIcon: Icon(Icons.calendar_today )
+               ),
+             )
            ),
 
            Container(
