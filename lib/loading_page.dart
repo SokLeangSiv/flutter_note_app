@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:midterm/pages/create_todo_page.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:midterm/pages/home_page.dart';
 
 void main() {
   runApp(
@@ -33,7 +34,7 @@ class MyHomePage extends State<LoadApp> {
             () =>
             Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => TodoList())
+                MaterialPageRoute(builder: (context) => HomePage())
             )
     );
   }
