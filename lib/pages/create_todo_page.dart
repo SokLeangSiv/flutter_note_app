@@ -136,151 +136,153 @@ class TodoListState extends State<TodoList> {
         title: const Text('Create Note'),
       ),
 
-     body: Column(
-         crossAxisAlignment: CrossAxisAlignment.start,
-         children: <Widget>[
-
-           Container(
-             padding: EdgeInsets.all(20),
-             child: Text(
-                 "Create Note",
-               style: TextStyle(
-                 fontWeight: FontWeight.bold,
-                 fontSize: 30
-               )
-
-             )
-           ),
-
-           Container(
-             padding: EdgeInsets.only(left: 20.0),
-             child: Text(
-                 "Title:",
-               style: TextStyle(
-                 fontSize: 20,
-               ),
-             )
-           ),
-
-           Container(
-            padding: EdgeInsets.all(20),
-             child: TextField(
-                 controller: titleInput,
-               decoration: InputDecoration(
-                 border: OutlineInputBorder(),
-                 label: Text("Title"),
-                 prefixIcon: Icon(Icons.title_outlined ),
-               )
-             )
-           ),
-
-
-           Container(
-               padding: EdgeInsets.only(left: 20.0),
-               child: Text(
-                 "Description:",
-                 style: TextStyle(
-                   fontSize: 20,
-                 ),
-               )
-           ),
-
-           Container(
+     body: SingleChildScrollView(
+       child: Column(
+           crossAxisAlignment: CrossAxisAlignment.start,
+           children: <Widget>[
+       
+             Container(
                padding: EdgeInsets.all(20),
-               child: TextField(
-                   controller: descriptionInput,
-                   decoration: InputDecoration(
-                     contentPadding: EdgeInsets.symmetric(vertical: 40),
-                     border: OutlineInputBorder(),
-                     label: Text("Description"),
-                     prefixIcon: Icon(Icons.description),
-                   )
-               )
-           ),
-
-           Container(
-               padding: EdgeInsets.only(left: 20.0),
                child: Text(
-                 "Date:",
+                   "Create Note",
                  style: TextStyle(
-                   fontSize: 20,
-                 ),
+                   fontWeight: FontWeight.bold,
+                   fontSize: 30
+                 )
+       
                )
-           ),
-
-            Container(
-               padding: EdgeInsets.all(20),
-               child: ElevatedButton(
-                 onPressed: () => _selectDate(context),
-                 child: Text('Select Date'),
-               ),
-           ),
-
-           Container(
-             padding: EdgeInsets.all(20),
-             width: 200,
-             child: TextField(
-               readOnly: true,
-               controller: dateInput,
-               decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  label: Text("Date"),
-                  prefixIcon: Icon(Icons.calendar_today )
-               ),
-             )
-           ),
-
-           Container(
-               padding: EdgeInsets.only(left: 20.0),
-               child: Text(
-                 "Color:",
-                 style: TextStyle(
-                   fontSize: 20,
-                 ),
-               )
-           ),
-
-           Container(
-             margin: EdgeInsets.all(20),
-             height: 50,
-             width: 50,
-             decoration: BoxDecoration(
-               color: color,
              ),
-
-             child:
-                 TextButton(
-                 onPressed: pickColor,
-                 child: Text(''),
+       
+             Container(
+               padding: EdgeInsets.only(left: 20.0),
+               child: Text(
+                   "Title:",
+                 style: TextStyle(
+                   fontSize: 20,
+                 ),
                )
-
-           ),
-
-
-           Container(
-              padding: EdgeInsets.only(left: 20.0),
-              height: 50,
-              child: ElevatedButton(
-                    onPressed: create_todo, // press create button to store data
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(Colors.yellow),
-
-                    ),
-                    child: Text(
-                        "Create",
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.black,
-                      )
-                    ),
+             ),
+       
+             Container(
+              padding: EdgeInsets.all(20),
+               child: TextField(
+                   controller: titleInput,
+                 decoration: InputDecoration(
+                   border: OutlineInputBorder(),
+                   label: Text("Title"),
+                   prefixIcon: Icon(Icons.title_outlined ),
+                 )
                )
-           ),
-
-           //  Text(notes[1].color.toString()),
-           // Text(color.toString()),
-           // Text(notes[0].title.toString()),
-         ]
-       ),
+             ),
+       
+       
+             Container(
+                 padding: EdgeInsets.only(left: 20.0),
+                 child: Text(
+                   "Description:",
+                   style: TextStyle(
+                     fontSize: 20,
+                   ),
+                 )
+             ),
+       
+             Container(
+                 padding: EdgeInsets.all(20),
+                 child: TextField(
+                     controller: descriptionInput,
+                     decoration: InputDecoration(
+                       contentPadding: EdgeInsets.symmetric(vertical: 40),
+                       border: OutlineInputBorder(),
+                       label: Text("Description"),
+                       prefixIcon: Icon(Icons.description),
+                     )
+                 )
+             ),
+       
+             Container(
+                 padding: EdgeInsets.only(left: 20.0),
+                 child: Text(
+                   "Date:",
+                   style: TextStyle(
+                     fontSize: 20,
+                   ),
+                 )
+             ),
+       
+              Container(
+                 padding: EdgeInsets.all(20),
+                 child: ElevatedButton(
+                   onPressed: () => _selectDate(context),
+                   child: Text('Select Date'),
+                 ),
+             ),
+       
+             Container(
+               padding: EdgeInsets.all(20),
+               width: 200,
+               child: TextField(
+                 readOnly: true,
+                 controller: dateInput,
+                 decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    label: Text("Date"),
+                    prefixIcon: Icon(Icons.calendar_today )
+                 ),
+               )
+             ),
+       
+             Container(
+                 padding: EdgeInsets.only(left: 20.0),
+                 child: Text(
+                   "Color:",
+                   style: TextStyle(
+                     fontSize: 20,
+                   ),
+                 )
+             ),
+       
+             Container(
+               margin: EdgeInsets.all(20),
+               height: 50,
+               width: 50,
+               decoration: BoxDecoration(
+                 color: color,
+               ),
+       
+               child:
+                   TextButton(
+                   onPressed: pickColor,
+                   child: Text(''),
+                 )
+       
+             ),
+       
+       
+             Container(
+                padding: EdgeInsets.only(left: 20.0),
+                height: 50,
+                child: ElevatedButton(
+                      onPressed: create_todo, // press create button to store data
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(Colors.yellow),
+       
+                      ),
+                      child: Text(
+                          "Create",
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.black,
+                        )
+                      ),
+                 )
+             ),
+       
+             //  Text(notes[1].color.toString()),
+             // Text(color.toString()),
+             // Text(notes[0].title.toString()),
+           ]
+         ),
+     ),
 
 
     );
